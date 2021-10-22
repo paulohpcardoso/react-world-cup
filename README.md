@@ -1,3 +1,11 @@
+# World Cup Site
+
+Este projeto será desenvolvido em React, utilizando a lib UI Material-UI e a styled-components para estilização dos componentes da lib.
+
+Também é utilizado a lib react-router-dom.
+
+Por enquanto está apenas desenvolvido o esquema de rotas, com possíveis alterações ao decorrer do projeto.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
