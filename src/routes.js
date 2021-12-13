@@ -3,10 +3,10 @@ import { lazy } from 'react';
 const routes = [
   {
     path: 'admin/dashboard',
-    component: lazy(() => import('components/Dashboard')),
+    component: lazy(() => import('./screens/Dashboard/Dashboard')),
     exact: true
   },
-  {
+  /*{
     path: 'admin/selecoes',
     component: lazy(() => import('components/SelecoesList')),
     exact: true
@@ -45,7 +45,7 @@ const routes = [
     path: 'admin/jogadores/:id',
     component: lazy(() => import('components/Jogadores')),
     exact: true
-  }
+  }*/
 ];
 
 export default routes;

@@ -4,18 +4,21 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import ProtectedRoutes from './components/ProtectedRotes/ProtectedRoutes';
+import Login from './screens/Login/Login';
 
 export default function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Home} />
+        {/* <Route exact path="/" component={Home} />
         <Route exact path="/estatisticas" component={Estatisticas} />
         <Route exact path="/grupos" component={Grupos} />
         <Route exact path="/noticias" component={Noticias} />
         <Route exact path="/partidas" component={Partidas} />
-        <Route exact path="/partidas/:id" component={DetalhePartida} />
+        <Route exact path="/partidas/:id" component={DetalhePartida} /> */ }
         <Route exact path="/admin/login" component={Login} />
+        <ProtectedRoutes />
       </Switch>
     </Router>
   )
@@ -43,8 +46,4 @@ function Partidas() {
 
 function DetalhePartida() {
   return <h1>Detalhes da partida</h1>;
-}
-
-function Login() {
-  return <h1>Login</h1>;
 }
