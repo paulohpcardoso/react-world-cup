@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import Header from '../../components/Header/Header';
 
-const Selecoes = () => {
+const Partidas = () => {
 
     const history = useHistory();
-    const [selecoes, setSelecoes] = useState([]);
+    const [partidas, setPartidas] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const token = await localStorage.getItem('token');
             await axios.get(
-                'http://localhost:4000/selecoes', 
+                'http://localhost:4000/partidas', 
                 { headers: { Authorization: 'Bearer ' +  token } }
             )
                 .then(async response => {
                     if (response.status === 200) {
                         console.log(response.data);
-                        await setSelecoes(response.data);
+                        await setPartidas(response.data);
                     }
                 })
         }
@@ -32,38 +33,34 @@ const Selecoes = () => {
             <Header />
 
             <div>
-                <Typography variant="h4" style={{ padding: '10px' }}>Seleções</Typography>
+                <Typography variant="h4" style={{ padding: '10px' }}>Partidas</Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Seleção</TableCell>
-                                <TableCell>Grupo</TableCell>
-                                <TableCell>Pontos</TableCell>
-                                <TableCell>Vitórias</TableCell>
-                                <TableCell>Empates</TableCell>
-                                <TableCell>Derrotas</TableCell>
-                                <TableCell>Gols Sofridos</TableCell>
-                                <TableCell>Gols Tomados</TableCell>
+                                <TableCell>Seleção 1</TableCell>
+                                <TableCell>Gols Selecao 1</TableCell>
+                                <TableCell>Seleção 2</TableCell>
+                                <TableCell>Gols Selecao 2</TableCell>
+                                <TableCell>Data</TableCell>
+                                <TableCell>Hora</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {selecoes.map(selecao => {
+                            {partidas.map(partida => {
                                 return (
                                     <TableRow
-                                        key={selecao.name}
+                                        key={partida.sel1 + partida.sel2}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">
-                                            {selecao.name}
+                                            {partida.sel1}
                                         </TableCell>
-                                        <TableCell align="left">{selecao.group}</TableCell>
-                                        <TableCell align="left">{selecao.points}</TableCell>
-                                        <TableCell align="left">{selecao.victories}</TableCell>
-                                        <TableCell align="left">{selecao.draws}</TableCell>
-                                        <TableCell align="left">{selecao.defeats}</TableCell>
-                                        <TableCell align="left">{selecao.goalsTaken}</TableCell>
-                                        <TableCell align="left">{selecao.goalsPro}</TableCell>
+                                        <TableCell align="left">{partida.goalsSel1}</TableCell>
+                                        <TableCell align="left">{partida.sel2}</TableCell>
+                                        <TableCell align="left">{partida.goalsSel2}</TableCell>
+                                        <TableCell align="left">{moment(partida.date).format('DD-MM-YYYY')}</TableCell>
+                                        <TableCell align="left">{moment(partida.date).format('HH:mm')}</TableCell>
                                     </TableRow>
                                 )
                             })}
@@ -75,4 +72,4 @@ const Selecoes = () => {
     )
 }
 
-export default Selecoes;
+export default Partidas;

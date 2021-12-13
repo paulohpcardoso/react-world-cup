@@ -17,7 +17,13 @@ const Header = () => {
                 justifyContent: 'space-between'
             }}
         >
-            <Typography color='#FFFFFF' variant="h5">Dashboard Copa do Mundo 2022</Typography>
+            <Typography 
+                color='#FFFFFF'
+                variant="h5"
+                onClick={() => history.push('/admin/dashboard')}
+            >
+                Dashboard Copa do Mundo 2022
+            </Typography>
             <Button 
                 style={{ 
                     marginRight: '20px', 

@@ -4,22 +4,22 @@ import { useHistory } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import Header from '../../components/Header/Header';
 
-const Selecoes = () => {
+const Jogadores = () => {
 
     const history = useHistory();
-    const [selecoes, setSelecoes] = useState([]);
+    const [jogadores, setJogadores] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const token = await localStorage.getItem('token');
             await axios.get(
-                'http://localhost:4000/selecoes', 
+                'http://localhost:4000/jogadores', 
                 { headers: { Authorization: 'Bearer ' +  token } }
             )
                 .then(async response => {
                     if (response.status === 200) {
                         console.log(response.data);
-                        await setSelecoes(response.data);
+                        await setJogadores(response.data);
                     }
                 })
         }
@@ -32,38 +32,40 @@ const Selecoes = () => {
             <Header />
 
             <div>
-                <Typography variant="h4" style={{ padding: '10px' }}>Seleções</Typography>
+                <Typography variant="h4" style={{ padding: '10px' }}>Jogadores</Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
+                                <TableCell>Nome</TableCell>
                                 <TableCell>Seleção</TableCell>
-                                <TableCell>Grupo</TableCell>
-                                <TableCell>Pontos</TableCell>
-                                <TableCell>Vitórias</TableCell>
-                                <TableCell>Empates</TableCell>
-                                <TableCell>Derrotas</TableCell>
-                                <TableCell>Gols Sofridos</TableCell>
-                                <TableCell>Gols Tomados</TableCell>
+                                <TableCell>Posição</TableCell>
+                                <TableCell>Gols</TableCell>
+                                <TableCell>Assistências</TableCell>
+                                <TableCell>Cartões Amarelo</TableCell>
+                                <TableCell>Cartões Vermelho</TableCell>
+                                <TableCell>Impedimentos</TableCell>
+                                <TableCell>Defesas</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {selecoes.map(selecao => {
+                            {jogadores.map(jogador => {
                                 return (
                                     <TableRow
-                                        key={selecao.name}
+                                        key={jogador.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">
-                                            {selecao.name}
+                                            {jogador.name}
                                         </TableCell>
-                                        <TableCell align="left">{selecao.group}</TableCell>
-                                        <TableCell align="left">{selecao.points}</TableCell>
-                                        <TableCell align="left">{selecao.victories}</TableCell>
-                                        <TableCell align="left">{selecao.draws}</TableCell>
-                                        <TableCell align="left">{selecao.defeats}</TableCell>
-                                        <TableCell align="left">{selecao.goalsTaken}</TableCell>
-                                        <TableCell align="left">{selecao.goalsPro}</TableCell>
+                                        <TableCell align="left">{jogador.selecao}</TableCell>
+                                        <TableCell align="left">{jogador.position}</TableCell>
+                                        <TableCell align="left">{jogador.goals}</TableCell>
+                                        <TableCell align="left">{jogador.assists}</TableCell>
+                                        <TableCell align="left">{jogador.yellowCards}</TableCell>
+                                        <TableCell align="left">{jogador.redCards}</TableCell>
+                                        <TableCell align="left">{jogador.impediments}</TableCell>
+                                        <TableCell align="left">{jogador.defenses}</TableCell>
                                     </TableRow>
                                 )
                             })}
@@ -75,4 +77,4 @@ const Selecoes = () => {
     )
 }
 
-export default Selecoes;
+export default Jogadores;
